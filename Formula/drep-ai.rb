@@ -175,7 +175,15 @@ class DrepAi < Formula
   end
 
   def install
-    virtualenv_install_with_resources
+    # Create virtualenv
+    venv = virtualenv_create(libexec, "python3.11")
+
+    # Install binary wheels for Rust-compiled packages first
+    venv.pip_install "pydantic-core", "jiter", "httptools", "uvloop", "watchfiles"
+
+    # Install everything else from resources
+    venv.pip_install resources.reject { |r| ["pydantic-core", "jiter", "httptools", "uvloop", "watchfiles"].include?(r.name) }
+    venv.pip_install_and_link buildpath
   end
 
   test do
