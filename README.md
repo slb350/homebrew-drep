@@ -78,6 +78,63 @@ https://github.com/slb350/homebrew-drep/issues
 For issues with drep itself, report at:
 https://github.com/slb350/drep/issues
 
+## Releasing a New Version
+
+This tap uses an automated release script to update the formula when a new version is published to PyPI.
+
+### Prerequisites
+
+1. New version must be published to [PyPI](https://pypi.org/project/drep-ai/) first
+2. Ensure you have `jq` installed: `brew install jq`
+
+### Release Process
+
+Simply run the release script with the new version number:
+
+```bash
+./release-brew.sh 0.8.3
+```
+
+The script will:
+1. ✅ Fetch the release tarball from PyPI
+2. ✅ Calculate the SHA256 hash automatically
+3. ✅ Update the Homebrew formula with new version and hash
+4. ✅ Optionally test the formula locally
+5. ✅ Optionally commit and push changes
+
+### Manual Release (if needed)
+
+If you prefer to update manually:
+
+1. Download the new version from PyPI:
+   ```bash
+   curl -LO https://files.pythonhosted.org/packages/.../drep_ai-X.Y.Z.tar.gz
+   ```
+
+2. Calculate SHA256:
+   ```bash
+   shasum -a 256 drep_ai-X.Y.Z.tar.gz
+   ```
+
+3. Update `Formula/drep-ai.rb`:
+   - Update the `url` with the new tarball URL
+   - Update the `sha256` with the calculated hash
+   - Update version in `pip install drep-ai==X.Y.Z`
+   - Update version in `assert_match "X.Y.Z"`
+
+4. Test locally:
+   ```bash
+   brew install --build-from-source ./Formula/drep-ai.rb
+   drep --version
+   ```
+
+5. Commit and push:
+   ```bash
+   git add Formula/drep-ai.rb
+   git commit -m "chore(formula): Update drep-ai to vX.Y.Z"
+   git push
+   ```
+
 ## License
 
 MIT License - see [LICENSE](https://github.com/slb350/drep/blob/main/LICENSE)
