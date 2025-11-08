@@ -4,17 +4,17 @@ This is the official Homebrew tap for [drep](https://github.com/slb350/drep) - a
 
 ## Installation
 
-### Install from this tap
+Install drep using Homebrew:
 
 ```bash
 brew tap slb350/drep
 brew install drep-ai
 ```
 
-### Verify installation
+Verify the installation:
 
 ```bash
-drep --version
+drep --help
 ```
 
 ## Usage
@@ -53,6 +53,18 @@ drep (Documentation & Review Enhancement Platform) is an AI-powered tool that:
 - **Main Repository**: https://github.com/slb350/drep
 - **PyPI Package**: https://pypi.org/project/drep-ai/
 - **Documentation**: https://github.com/slb350/drep/tree/main/docs
+
+## Known Issues
+
+Some users may see warnings about dylib linking with Rust-compiled dependencies (like jiter). These warnings can generally be ignored as they don't affect functionality.
+
+## Alternative Installation
+
+If you encounter issues with the Homebrew installation, you can install drep via pip:
+
+```bash
+pip install drep-ai
+```
 
 ## Troubleshooting
 

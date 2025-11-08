@@ -1,6 +1,4 @@
 class DrepAi < Formula
-  include Language::Python::Virtualenv
-
   desc "AI-powered code review and documentation quality tool"
   homepage "https://github.com/slb350/drep"
   url "https://files.pythonhosted.org/packages/79/1b/094f99e626a1d856be6094e6129a1f1bc91cd92841493a9988ced55f0694/drep_ai-0.8.2.tar.gz"
@@ -10,13 +8,17 @@ class DrepAi < Formula
   depends_on "python@3.11"
 
   def install
-    # Create virtual environment
-    venv = virtualenv_create(libexec, "python@3.11")
+    # Create a virtualenv
+    system Formula["python@3.11"].opt_bin/"python3.11", "-m", "venv", libexec
 
-    # Install drep-ai and all dependencies (allows binary wheels)
-    system libexec/"bin/pip", "install", buildpath
+    # Upgrade pip, setuptools, and wheel in the venv
+    system libexec/"bin/pip", "install", "--upgrade", "pip", "setuptools", "wheel"
 
-    # Create bin symlink
+    # Install drep-ai from PyPI with all dependencies
+    # This allows pip to use binary wheels for Rust-compiled packages
+    system libexec/"bin/pip", "install", "drep-ai==0.8.2"
+
+    # Create symlink for the executable
     bin.install_symlink libexec/"bin/drep"
   end
 
