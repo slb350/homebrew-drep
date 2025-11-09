@@ -1,8 +1,8 @@
 class DrepAi < Formula
   desc "AI-powered code review and documentation quality tool"
   homepage "https://github.com/slb350/drep"
-  url "https://files.pythonhosted.org/packages/88/93/838bf9bbbc9f359de1daef8925bf9bff9aeb4d562a32a26bb44cdc82e58a/drep_ai-1.0.0.tar.gz"
-  sha256 "b51a8e5e6394478246425fa857b9f39bcb2e9603f3b4d563df7ea531269fe8c0"
+  url "https://files.pythonhosted.org/packages/af/9d/a19d6a37214782c6813f0da05fab77ed2e83a48fba75d7e5de37d72b5936/drep_ai-1.1.0.tar.gz"
+  sha256 "20ccc779add78ebd256b641a7041a4339e2e11369c92b855bbb09ef9e7125fb8"
   license "MIT"
 
   depends_on "python@3.11"
@@ -16,7 +16,7 @@ class DrepAi < Formula
 
     # Install drep-ai from PyPI with all dependencies
     # This allows pip to use binary wheels for Rust-compiled packages
-    system libexec/"bin/pip", "install", "drep-ai==1.0.0"
+    system libexec/"bin/pip", "install", "drep-ai==1.1.0"
 
     # Create symlink for the executable
     bin.install_symlink libexec/"bin/drep"
